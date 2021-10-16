@@ -3,7 +3,7 @@
 
 A very simple and fully functional Raspberry Pi-based KVM (KVM = Keyboard, Video, Mouse) over IP that you can make with your own hands. This device helps to manage servers or workstations remotely, regardless of the health of the operating system or whether one is installed. You can fix any problem, configure the BIOS, and even reinstall the OS using the virtual CD-ROM or Flash Drive.
 
-The website: [pikvm.org](https://pikvm.org). Also join to the [Discord Community Chat](https://discord.gg/bpmXfz5) for news, questions and support!
+The website: [pikvm.org](https://pikvm.org). Also check out [the documentation](https://docs.pikvm.org) and join to the [Discord Community Chat](https://discord.gg/bpmXfz5) for news, questions and support!
 
 | **[>>> DIY Device Getting Started <<<](#diy-getting-started)** | **[>>> PiKVM v3 HAT Getting Started <<<](#pikvm-v3-hat-features)** |
 | --------------------------------------------- | ------------------------------------------ |
@@ -169,7 +169,7 @@ The dongle is completely supported and PiKVM works great with it. But it has som
 * **Don't use random relay modules or random optocouplers!** Some relays or optocouplers may not be sensitive enough for the Raspberry Pi, some others may be low-level controlled. Either use relays that are activated by a high logic level, or follow the design provided and buy an OMRON. See details [here](https://github.com/pikvm/pikvm/issues/13).  
 
 
-# How to set up the device can be seen from [here](https://github.com/pikvm/pikvm/blob/master/pages/wiring_examples.md)
+# How to set up the device can be seen from [here](https://docs.pikvm.org/wiring_examples)
 
 # PiKVM v3 HAT Features
 
@@ -178,9 +178,9 @@ The dongle is completely supported and PiKVM works great with it. But it has som
 
 **[>>> PiKVM v3 HAT on Kickstarter! <<<](https://www.kickstarter.com/projects/mdevaev/pikvm-v3-hat)**
 
-** The Kickstarer was a HUGE success but has ended.**
+**The Kickstarer was a HUGE success but has ended.**
 
-** If you are still looking to get one after the KS has ended they will be available on pishop.us in Novemeber **
+**If you are still looking to get one after the KS has ended they will be available on [pishop.us](https://www.pishop.us/product/pi-kvm-v3-hat-for-raspberry-pi-4/) around Novemeber**
 
 We have developed our own HAT for the Raspberry Pi 4. It will have all the features of the v2 platform, including:
 
@@ -272,101 +272,45 @@ See video how-tos:
 
 -----
 
-# Installing the OS
-Here the final steps. There are two ways to get the PiKVM OS:
-  * We provide the ready-made images for **Raspberry Pi 4** for platforms v3, **v2-hdmi** (the CSI-2 bridge) and **v2-hdmiusb** (the USB dongle); for **ZeroW** **v2-hdmi** [Follow these instructions](pages/flashing_os.md) to install the OS quickly.
-  * For the other boards and platforms, you need to build the operating system manually. Don't worry, it's very simple! [Just follow these instructions](pages/building_os.md). You can also build the OS for RPi4 manually if you really want to :)
+# The final steps
+1. [Flash the operating system](https://docs.pikvm.org/flashing_os).
+2. **Carefully read [the "First steps" guide](https://docs.pikvm.org/first_steps)** - how to find a device on the network, how to log in there, change passwords, and so on. **Follow the steps described there and come back here**.
+3. V0 only: [flash the Arduino HID](https://docs.pikvm.org/flashing_hid).
+4. **Learn about the [basics of working with PiKVM](https://docs.pikvm.org/first_steps) and CHANGE THE PASSWORDS**
+5. Note for the HDMI-USB dongle:
+    <details>
+      <summary>:exclamation:Click to show:exclamation:</summary>
 
-# You're amazing!
-- ❗NOTE❗ After performing any update of pikvm, clear web browser cache or use incognito/private browsing mode.
+      Many USB video capture devices tell the server's video card that the HDMI cable is supposedly disconnected. This may lead to the fact that if you boot the server without an active stream, the server will not detect your capture card. This is easy to fix:
+      * Switch filesystem to RW-mode:
+        ```
+        # rw
+        ```
+      * Edit file `/etc/kvmd/override.yaml` and add these lines:
+        ```yaml
+        kvmd:
+            streamer:
+                forever: true
+                cmd_append: [--slowdown]
+        ```
+      * Finish:
+        ```
+        # ro
+        # systemctl restart kvmd
+        ```
 
-Congratulations! Your PiKVM will be available via SSH (`ssh root@<addr>` with password `root` by default) and HTTPS (try to open in a browser the URL `https://<addr>`, the login `admin` and password `admin` by default). For HTTPS a self-signed certificate is used by default.
-
-To change the root password use command `passwd` via SSH or webterm. To change PiKVM web password use `kvmd-htpasswd set admin`. As indicated on the login screen use `rw` to make the root filesystem writable, before issuing these commands. After making changes, make sure to run the command `ro`.
-
-# Access to PiKVM from the Internet
-- ❗NOTE❗ Please take proper security precaustions when exposing this to the internet. The use of tailscale is HIGHLY suggested.
-
-You can use port forwarding for port 443 on your router if it has an external IP address. In all other cases, you can use the excellent free VPN service [Tailscale](pages/tailscale.md), which is configured on PiKVM with a [few simple commands](pages/tailscale.md).
-
-If you have any problems or questions, contact us using Discord: https://discord.gg/bpmXfz5
-
-Subscribe to our Subreddit to follow news and releases: https://www.reddit.com/r/pikvm
+    </details>
+6. If you are a happy **PiKVM v3 HAT** user then we have a [special guide for you](https://docs.pikvm.org/v3).
+7. [**Explore the features of PiKVM**](https://docs.pikvm.org) using the documentation's table of contents.
+8. Configure access to PiKVM from the Internet using [port forwarding](https://docs.pikvm.org/port_forwarding) or [Tailscale VPN](https://docs.pikvm.org/tailscale).
+9. **If you encounter a problem**, take a look at the **[FAQ](https://docs.pikvm.org/faq)**, but if nothing helped, contact our **[Discord chat](https://discord.gg/bpmXfz5)** - experienced users and the PiKVM team will definitely help you.
 
 Happy using of PiKVM :)
 
 -----
 
-# Limitations
-* In rare cases, some very buggy BIOSes doesn't like HID and Mass Storage in a single USB device. You can either [disable Mass Storage](https://github.com/pikvm/pikvm/blob/master/pages/msd.md#disable-msd), or use [Arduino HID](https://github.com/pikvm/pikvm/blob/master/pages/arduino_hid.md) to physically separate them.
-
------
-
-# What's next?
-* The PiKVM file system is always mounted in read-only mode. This prevents it from being damaged by a sudden power outage. To change the configuration you must first switch the filesystem to write mode using the command `rw` from root. After the changes, be sure to run the command `ro` to switch it back to read-only.
-
-* **NEVER** edit `/etc/kvmd/main.yaml`. Use `/etc/kvmd/override.yaml` to redefine the system parameters. All other files that are also not recommended for editing have read-only permissions. If you edit any of these files, you will need to manually make changes to them when you upgrade your system. You can view the current configuration and all available KVMD parameters using the command `kvmd -m`.
-
-* Almost all KVMD (the main daemon controlling PiKVM) configuration files use [YAML](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html) syntax. Information on the format's syntax can be found at the link provided.
-
-* [Disabling authorization](pages/cookbook.md#disabling-authorization).
-
-* [Disabling ATX and hiding the menu](pages/cookbook.md#disabling-atx-and-hiding-the-menu).
-
-* [Disabling webterm](pages/cookbook.md#disabling-webterm).
-    
-* [Using H.264 / WebRTC](pages/webrtc.md).
-
-* [Video modes of HDMI CSI brodge (if no video in UEFI)](pages/edid.md).
-
-* [Mouse modes (if the mouse doesn't work in UEFI)](pages/mouse.md).
-
-* [Recording screen video](pages/video.md).
-
-* [Multiport KVM over IP](pages/multiport.md).
-
-* [Using Mass-Storage Drive](pages/msd.md).
-    - [Disable MSD](pages/msd.md#disable-msd).
-    - [Upload images manually (without Web UI)](pages/msd.md#upload-images-manually-without-web-ui).
-    - [Multiple and writable drives](pages/msd.md#multiple-and-writable-drives).
-    - [Create a Microsoft Windows based Flash disk image](pages/msd.md#create-a-microsoft-windows-based-flash-disk-image).
-    - [Create a drive image on macOS](pages/msd.md#create-a-drive-image-on-macos).
-
-* [Using IPMI and Redfish](pages/ipmi.md).
-
-* [Using Wake-on-LAN](pages/wol.md).
-  
-* [Using VNC](pages/vnc.md).
-  
-* [Using Arduino HID (for USB or PS/2) on v2 platform](pages/arduino_hid.md).
-
-* [Using Bluetooth HID](pages/bluetooth_hid.md).
-
-* [Wi-Fi configuration after install](pages/wifi_config.md).
-
-* [Export monitoring metrics to Prometheus](pages/prometheus.md).
-
-* [Control GPIO ports, USB relays, IPMI hosts, send Wake-on-LAN messages](pages/gpio.md).
-
-* [Centralized authorization for multiple PiKVMs](https://github.com/pikvm/kvmd-auth-server).
-
-* [Cookbook](pages/cookbook.md).
-    - [Take a HDMI screenshot via console on PiKVM](pages/cookbook.md#take-a-hdmi-screenshot-via-console-on-pikvm).
-    - [Get installed KVMD version via console](pages/cookbook.md#get-installed-kvmd-version-via-console).
-    - [Enable Serial-over-USB connection](pages/cookbook.md#enable-serial-over-usb-connection).
-
------
-
-# FAQ and Troubleshooting
-If you have any questions or run into problems, take a look at [this page](pages/faq.md).  
-We've probably already found a solution for it :)
-
-For any help, you can contact our discord chat: https://discord.gg/bpmXfz5
-
------
-
 # Donate
-This project is developed on a non-commercial basis by Open Source enthusiasts. If you find PiKVM useful or it has saved you a long trip to check on an unresponsive server, you can support the lead developer by donating a few dollars via [Patreon](https://www.patreon.com/pikvm) or [PayPal](https://www.paypal.me/mdevaev). With this money, he will be able to buy new hardware (Raspberry Pi boards and other components) to test and maintain various configurations of PiKVM, and generally devote significantly more time to the project. At the bottom of this page are the names of all the people who have helped this project develop with their donations. Our gratitude knows no bounds!
+This project is developed by Open Source enthusiasts. If you find PiKVM useful or it has saved you a long trip to check on an unresponsive server, you can support the lead developer by donating a few dollars via [Patreon](https://www.patreon.com/pikvm) or [PayPal](https://www.paypal.me/mdevaev). With this money, he will be able to buy new hardware (Raspberry Pi boards and other components) to test and maintain various configurations of PiKVM, and generally devote significantly more time to the project. At the bottom of this page are the names of all the people who have helped this project develop with their donations. Our gratitude knows no bounds!
 
 If you wish to use PiKVM in production, we accept orders to modify it for your needs or implement custom features you require. Contact us via [live chat](https://discord.gg/bpmXfz5) or email the lead developer at: mdevaev@gmail.com
 
@@ -507,6 +451,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * dixon wong
 * dizztrukshin
 * Dmitry Shilov
+* Dominic Phoon
 * Dominik Klonowski
 * Egan Ford
 * Elani Ferri
@@ -633,6 +578,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Lee Wilkinson
 * LeeNX
 * Leonard Feineis
+* Liviu Dimitriu
 * Lizardo Hernandez
 * LoCascio
 * Lordbob75
@@ -671,9 +617,11 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Mauricio Allende
 * Mecky
 * Mehmet Aydoğdu
+* Michael Bartholomew
 * Michael Bombe
 * Michael Collins
 * Michael Copeland
+* Michael Ho
 * Michael Kovacs
 * Michael Lynch
 * Michael Pennington
@@ -743,6 +691,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Rico Cantrell
 * Rob Tongue
 * Robert Klauco
+* Robert Weemhoff 
 * Robin Gfatter
 * Rodion DENISYUK
 * Rohit Priyadarshi
@@ -822,6 +771,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Vidru Eduard
 * Viktor Aschenbrenner
 * Viktor Ekmark
+* Vlad Sterescu
 * Walter_Ego
 * Will Froning
 * William Hooper
