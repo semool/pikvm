@@ -54,7 +54,7 @@ As a first step, we recommend carefully reading our documentation on [GitHub](ht
 ??? question "Why is PiKVM OS based on Arch Linux ARM and not Raspbian / Raspberry Pi OS?"
     There are several reasons:
 
-    * Several years ago, when PiKVM was just starting out, Raspbian didn't have a minimalistic buiimage and the transition to systemd was in full swing, which is why the distribution was not too stable.
+    * Several years ago, when PiKVM was just starting out, Raspbian didn't have a minimalistic image and the transition to systemd was in full swing, which is why the distribution was not too stable.
     * Raspbian did not have all the necessary packages in the repositories to satisfy most software dependencies.
     * PiKVM was born as a pet project, and the founder likes Arch the most.
 
@@ -64,7 +64,7 @@ As a first step, we recommend carefully reading our documentation on [GitHub](ht
 ## First steps
 
 ??? question "I can't find PiKVM IP address in my network"
-    Follow [this guide](faq.md#getting-access-to-pikvm).
+    Follow [this guide](first_steps.md#getting-access-to-pikvm).
 
 ??? question "What is the default password? How do I change it?"
     There are two types of accounts: OS and PiKVM (web interface) accounts. The system account `root` can be used for SSH/UART access and has the password `root`. The web interface account is called `admin` and has the password `admin`. The PiKVM account cannot be used for SSH access and vice versa.

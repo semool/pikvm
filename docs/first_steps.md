@@ -37,6 +37,8 @@ By default, PiKVM receives a dynamic IP address via DHCP.
     * **Linux-only:** Use command `arp-scan --localnet`.
     * **Linux, MacOS, Windows:** Download and run [Angry IP Scanner](https://angryip.org).
     * **Windows PowerShell:** Use command `arp -a`.
+    
+    In order to find your RaspberryPi using the arp commands, you need to look for the following MAC Address's: B827EB, DCA632 or E45F01
 
 For future examples, let's assume that your PiKVM has received the address **192.168.0.100**, which you have successfully detected using the instructions above. Then your device was assigned a hostname: **pikvm**.
 
@@ -45,7 +47,7 @@ For future examples, let's assume that your PiKVM has received the address **192
 
     **The default user is `admin` and the password is also `admin`.** After logging in, you will get access to the menu with the main functions. Using the Web terminal, you can change system settings and passwords.
 
-    The latest versions of Chrome do not allow access to the page with a self signed certificate, which is used in PiKVM by default. You can proceed by typing `thisisunsafe` and Chrome will then load the page.
+    *The latest versions of Chrome on Mac OS do not allow access to the page with a self signed certificate, which is used in PiKVM by default. You can proceed by typing `thisisunsafe` and Chrome will then load the page.*
 
 ??? example "Access to PiKVM via SSH"
     SSH is the most common remote access method in the Linux world. PiKVM is accessible via SSH. This method is used to manage the device:

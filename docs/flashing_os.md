@@ -8,12 +8,12 @@
 
 Download the appropriate SD card image. Select it based on the board, platform, and the video capture device you are using:
 
-* [**PiKVM v3 HAT (Raspberry Pi 4)**](https://pikvm.org/images/v3-hdmi-rpi4.img.bz2) <sub>- [*sha1*](https://pikvm.org/images/v3-hdmi-rpi4.img.bz2.sha1)</sub>
+* [**PiKVM v3 HAT (Raspberry Pi 4)**](https://files.pikvm.org/images/v3-hdmi-rpi4-latest.img.xz) <sub>- [*sha1*](https://files.pikvm.org/images/v3-hdmi-rpi4-latest.img.xz.sha1)</sub>
 * **DIY - Raspberry Pi 4, v2 platform:**
-    * [For HDMI-CSI bridge](https://pikvm.org/images/v2-hdmi-rpi4.img.bz2) <sub>- [*sha1*](https://pikvm.org/images/v2-hdmi-rpi4.img.bz2.sha1)</sub>
-    * [For HDMI-USB dongle](https://pikvm.org/images/v2-hdmiusb-rpi4.img.bz2) <sub>- [*sha1*](https://pikvm.org/images/v2-hdmiusb-rpi4.img.bz2.sha1)</sub>
+    * [For HDMI-CSI bridge](https://files.pikvm.org/images/v2-hdmi-rpi4-latest.img.xz) <sub>- [*sha1*](https://files.pikvm.org/images/v2-hdmi-rpi4-latest.img.xz.sha1)</sub>
+    * [For HDMI-USB dongle](https://files.pikvm.org/images/v2-hdmiusb-rpi4-latest.img.xz) <sub>- [*sha1*](https://files.pikvm.org/images/v2-hdmiusb-rpi4-latest.img.xz.sha1)</sub>
 * **DIY - Raspberry Pi ZeroW, v2 platform:**
-    * [For HDMI-CSI bridge](https://pikvm.org/images/v2-hdmi-zerow.img.bz2) <sub>- [*sha1*](https://pikvm.org/images/v2-hdmi-zerow.img.bz2.sha1)</sub>
+    * [For HDMI-CSI bridge](https://files.pikvm.org/images/v2-hdmi-zerow-latest.img.xz) <sub>- [*sha1*](https://files.pikvm.org/images/v2-hdmi-zerow-latest.img.xz.sha1)</sub>
 
 Pre-compiled images are only available for the Raspberry Pi 4 and ZeroW. For all other cases, you will need to build the operating system yourself. But don't worry, it's [very simple](building_os.md).
 
@@ -27,37 +27,49 @@ Pre-compiled images are only available for the Raspberry Pi 4 and ZeroW. For all
 ### Using Linux CLI
 
 Decompress and flash the image. Be careful when choosing your device path:
+
 ```
-# bzip2 -d v2-hdmi-rpi4.img.bz2
-# dd if=v2-hdmi-rpi4.img of=/dev/mmcblkX
+# xz --decompress v2-hdmi-rpi4-latest.img.xz
+# dd if=v2-hdmi-rpi4-latest.img of=/dev/mmcblkX
 ```
 
+You can also use `dd_rescue` or `ddrescue`.
 
-### Using balenaEtcher (Linux, MacOS and Windows)
 
-1. Download and install [balenaEtcher](https://www.balena.io/etcher).
+### Using RPi Imager (Linux, MacOS and Windows)
 
-2. Decompress the image file using your favorite archive software. If you don't have one that supports `.bz2` files (on Windows for example) - [7-Zip](https://www.7-zip.org) is a great and free tool. *Do not try to flash a compressed image: either it will not work, or it will take a very long time.*
+1. Download and install **the latest version** of [RPi Imager](https://github.com/raspberrypi/rpi-imager/releases).
 
-3. Run balenaEtcher:
+2. Run RPi Imager:
 
-    <img src="balena-1.png" alt="drawing" height="250" />
+    <img src="imager-1.jpg" width="400" />
 
-4. Press **Flash from file** and select a **decompressed** image (a file with `.img` suffix):
+3. Press **CHOOSE OS** and select **Use custom** image at bottom of the list:
 
-    <img src="balena-2.png" alt="drawing" height="250" />
+    <img src="imager-2.jpg" width="400" />
 
-5. Insert the memory card into the card reader. Press **Select target** and choose your memory card:
+4. After clicking on this item, select the image file (`.img.xz`), then click **CHOOSE STORAGE**:
 
-    <img src="balena-3.png" alt="drawing" height="250" />
+    <img src="imager-3.jpg" width="400" />
 
-6. Press **Flash!** button.
+5. Insert the memory card into the card reader. Choose the card reader from this list. **Be careful** and choose the right device:
 
-    <img src="balena-4.png" alt="drawing" height="250" />
+    <img src="imager-4.jpg" width="400" />
 
-7. Wait for the process to finish. Get yourself a coffee or do some stretching :) If an error occurs during flashing, repeat the process:
+6. After choosing the memory card, press the **WRITE** button. Confirm the operation when you are asked about it:
 
-    <img src="balena-5.png" alt="drawing" height="250" />
+    <img src="imager-5.jpg" width="400" />
 
-!!! tip
-    If balenaEtcher does not work for you and you continue to get failed bootup's, download the [Raspberry Pi Imager](https://www.raspberrypi.com/software) and use that instead. The general algorithm of actions is exactly the same: use a decompressed image, run Imager, select a device and flash the image there.
+7. Wait for the process to finish. Get yourself a coffee or do some stretching :)
+
+    !!! tip
+        The process may hang at 99% for a long time, this is okay, just wait for it to complete
+
+    <img src="imager-6.jpg" width="400" />
+
+8. Remove the memory card after successful completion:
+
+    <img src="imager-7.jpg" width="400" />
+
+    !!! tip
+        If an error occurs during flashing or booting PiKVM, repeat the process.
