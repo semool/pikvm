@@ -8,7 +8,7 @@
 
     If you want to connect PiKVM to Wi-Fi network, you need to tell the device ESSID and password before first boot.
     To do this, mount the first partition of the memory card (FAT32) and edit the `pikvm.txt` file there.
-    Do not remove line `FIRSTBOOT=1`, just add your wifi settings like this:
+    Do not remove line `FIRSTBOOT=1` or `FIRST_BOOT-1`, just add your wifi settings like this:
 
     ```
     FIRSTBOOT=1
@@ -20,6 +20,9 @@
     You will need to configure your router to disable channels 12-14 or disable Auto scan mode so it will connect.
         
     Save, unmount and follow the next step.
+    
+    !!! warning
+        `pikvm.txt` will be removed once its been used. You will need to recreate it again if you did not provide the correct info
 
 **Power up the device.**
 
