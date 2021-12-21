@@ -8,7 +8,8 @@
 
 Download the appropriate SD card image. Select it based on the board, platform, and the video capture device you are using:
 
-* [**PiKVM v3 HAT (Raspberry Pi 4)**](https://files.pikvm.org/images/v3-hdmi-rpi4-latest.img.xz) <sub>- [*sha1*](https://files.pikvm.org/images/v3-hdmi-rpi4-latest.img.xz.sha1)</sub>
+* **V3 HAT (Patron, Kickstarter, and future editions)**
+    * [PiKVM v3 HAT (Raspberry Pi 4)](https://files.pikvm.org/images/v3-hdmi-rpi4-latest.img.xz) <sub>- [*sha1*](https://files.pikvm.org/images/v3-hdmi-rpi4-latest.img.xz.sha1)</sub>
 * **DIY - Raspberry Pi 4, v2 platform:**
     * [For HDMI-CSI bridge](https://files.pikvm.org/images/v2-hdmi-rpi4-latest.img.xz) <sub>- [*sha1*](https://files.pikvm.org/images/v2-hdmi-rpi4-latest.img.xz.sha1)</sub>
     * [For HDMI-USB dongle](https://files.pikvm.org/images/v2-hdmiusb-rpi4-latest.img.xz) <sub>- [*sha1*](https://files.pikvm.org/images/v2-hdmiusb-rpi4-latest.img.xz.sha1)</sub>
@@ -37,6 +38,7 @@ Decompress and flash the image. Be careful when choosing your device path:
 
 You can also use `dd_rescue` or `ddrescue`.
 
+!!! warning "Check the advanced settings (CTRL+SHIFT+X), make sure they are blank or the flash will fail"
 
 ### Using RPi Imager (Linux, MacOS and Windows)
 
@@ -75,3 +77,5 @@ You can also use `dd_rescue` or `ddrescue`.
 
     !!! tip
         If an error occurs during flashing or booting PiKVM, repeat the process.
+        
+When you have completed these steps, please move to the [First Steps doc.](https://docs.pikvm.org/first_steps/)
