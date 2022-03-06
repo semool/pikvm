@@ -16,7 +16,7 @@ The website: [pikvm.org](https://pikvm.org). Also check out [the documentation](
 
 
 # Features
-* Supported **Raspberry Pi 2**, **3**, **4**, **ZeroW** and **Zero2W**;
+* Supported **Raspberry Pi 2**, **3**, **4**, **Zero2W**, **ZeroW**, **RPi1**, **NOTE: RPi1 and ZeroW will still work but has reached EOL and will no longer recieve updates**;
 * **FullHD video** using advanced **HDMI-to-CSI bridge** or **USB dongle**;
 * Extra low **video latency** with **MJPEG** or **H.264 / WebRTC** (for CSI bridge);
 * Bootable **Virtual CD-ROM** and **Flash Drive**;
@@ -247,6 +247,8 @@ Here is a diagram shows that how to connect all of the pieces (click to full siz
 
 **Raspberry Pi Zero (2) W**: This board has two USB micro connectors: one for power supply, the second for emulating a USB OTG device. You need to prevent backpowering as in the RPi4 case. To do this, you need to cut off the red power wire in the OTG wire, or seal the +5v pin in the USB-A connector with electrical tape like this:
 <img src="https://raw.githubusercontent.com/pikvm/pikvm/master/img/v2_tape_off.png" alt="drawing" width="300"/>
+  
+** REQUIRED ** A full 8 pair CAT5 or a flat Cisco like serial cable is nessessary for the ATX to function properly.
 
 See video how-tos:
 * [Making USB Y-splitter cable](https://www.youtube.com/watch?v=uLuBuQUF61o).
@@ -390,6 +392,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Bryan Adams
 * Bryan Montgomery
 * C P ELSE
+* Calanish
 * Cameron Tacklind
 * Carl Mercier
 * Carl-Fredrik Johansson
@@ -542,6 +545,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Jeff Urlwin
 * Jennifer Herting
 * Jennifer Rowlett
+* Jeremy Abel
 * Jerremy Holland
 * Jerry Nall
 * Jim Bailey
@@ -594,6 +598,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Lars
 * Lee Wilkinson
 * LeeNX
+* Leon Siegl
 * Leonard Feineis
 * Liviu Dimitriu
 * Lizardo Hernandez
@@ -737,6 +742,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Scott Gagon
 * Scott Spicola
 * Scott Tusing
+* Scott Worthington
 * Sean
 * SEAT
 * Seonwoo Lee
