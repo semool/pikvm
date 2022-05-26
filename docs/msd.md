@@ -17,6 +17,7 @@ There are some subtleties that you should know:
     The switch affects the settings of the future connection. For non-v3 devices,
     you need to either reboot your server or otherwise reinitialize the connection.
 
+!!! warning "Advanced Linux knowledge is necessary for some advanced aspects that are not part of the normal use case. IE: making larger flash files will need a different file location and those instructions will need to be modified. The following instructions are for you to have something to start with."
 
 -----
 ## Disable MSD
@@ -108,7 +109,7 @@ to the server and download some files from to PiKVM from it.
     # kvmd-otgmsd -i 1 --set-rw=1 --set-cdrom=0 --set-image=/root/flash.img
     ```
 
-    After that you will have access to the flash drive from the server. **Drive 0 represents a drive that is controlled via a web interface and API. Don't use it with kvmd-otgmsd if you don't know exactly what you're doing.**
+    After that you will have access to the flash drive from the target server. **Drive 0 represents a drive that is controlled via a web interface and API. Don't use it with kvmd-otgmsd if you don't know exactly what you're doing.**
 
 4. View the driver state:
 
