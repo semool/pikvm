@@ -72,6 +72,7 @@ nav:
         - "H.264 / WebRTC": webrtc.md
         - "Working with video": video.md
         - "Tuning HDMI EDID": edid.md
+        - "HDMI audio": audio.md
     - "Peripheral devices":
         - "Keyboard & mouse":
             - "Mouse modes": mouse.md
@@ -86,6 +87,7 @@ nav:
         - "Multiport KVM-over-IP": multiport.md
         - "Wake-on-LAN the server": wol.md
         - "IPMI & Redfish integration": ipmi.md
+        - "Persistent storage": pst.md
         - "Prometheus monitoring": prometheus.md
     - "Development":
         - "Cases for 3D printing": 3d_printing.md
