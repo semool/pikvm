@@ -311,7 +311,7 @@ Happy using of PiKVM :)
 -----
 
 # Donate
-This project is developed by Open Source enthusiasts. If you find PiKVM useful or it has saved you a long trip to check on an unresponsive server, you can support the lead developer by donating a few dollars on [Patreon](https://www.patreon.com/pikvm). With this money, he will be able to buy new hardware (Raspberry Pi boards and other components) to test and maintain various configurations of PiKVM, and generally devote significantly more time to the project. At the bottom of this page are the names of all the people who have helped this project develop with their donations. Our gratitude knows no bounds!
+This project is developed by Open Source enthusiasts. If you find PiKVM useful or it has saved you a long trip to check on an unresponsive server, you can support us by donating a few dollars on [Patreon](https://www.patreon.com/pikvm) or [Paypal](https://paypal.me/pikvm) or buying our devices. With this money, we will be able to buy new hardware (Raspberry Pi boards and other components) to test and maintain various configurations of PiKVM, and generally devote significantly more time to the project. At the bottom of this page are the names of all the people who have helped this project develop with their donations. Our gratitude knows no bounds!
 
 If you wish to use PiKVM in production, we accept orders to modify it for your needs or implement custom features you require. Contact us via [live chat](https://discord.gg/bpmXfz5) or email the lead developer at: mdevaev@gmail.com
 
@@ -486,6 +486,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Finn Ebenritter
 * floppy
 * fo0bar
+* Foad Yousef
 * Foamy
 * Foli Ayivoh
 * Folkert Weistra
@@ -497,6 +498,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Garrett Dangerfield
 * Ge Men
 * Genkinger Andreas
+* Geijer
 * George Becker
 * Georgy Brodsky
 * Gerald
@@ -608,6 +610,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Kevin Bajohr
 * Kevin Schwartz
 * Kevin Sherwood
+* Kiera Kujisawa
 * Kiran Schuler
 * Koloman
 * Konrad Neitzel
@@ -775,9 +778,11 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Scott Worthington
 * Sean
 * SEAT
+* Sebastian
 * Seonwoo Lee
 * Sergey Lukjanov
 * Seth Jennings
+* Shawn Butts
 * Sheran Gunasekera
 * Shichun Chen
 * Shin Guey Wong
