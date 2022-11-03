@@ -113,7 +113,7 @@ PiKVM supports several different hardware configurations, referred to as **platf
     <ul>
       <li>1x USB-A to USB-A cable (male-male).</li>
       <li>1x Official Power Supply (USB-A or USB-C).</li>
-      <li>1x <a href="https://www.amazon.com/dp/B08C5FWQND">splitter</a> - This may need to be searched in your respecitve country.
+      <li>1x <a href="https://www.amazon.com/dp/B08C5FWQND">splitter</a> - This may need to be searched in your respective country.
       <li><a href="https://www.amazon.com/gp/product/B092MLT2J3">USB Power Blocker</a> - Will go into the USB-A end towards the target</li>
     </ul>
     </details>
@@ -324,6 +324,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
   <summary>View all people!</summary>
 
 * A. Isenring
+* Aaron Graubert
 * Aaron Heise
 * Aaron Stein
 * Accalia
@@ -347,6 +348,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Ananthaneshan Elampoornan
 * Andreas Marufke
 * Andreas Schmid
+* Andrew Brant
 * Andrew Melton
 * Andrew Reusch
 * Andrew Ruan
@@ -400,18 +402,22 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Bruno Gomes
 * Bryan Adams
 * Bryan Montgomery
+* Buzzer
 * C P ELSE
 * Calanish
+* Cameron Hatcher
 * Cameron Tacklind
 * Carl Mercier
 * Carl-Fredrik Johansson
 * Carlos Manuel Torres
 * cbad536
 * CHINATERA LIMITED
+* Chris Blackmon
 * Chris Burton
 * Chris Jackson
 * Chris Lewis
 * Chris Rizio
+* Christi King
 * Christian Schlögl
 * Christian Svensson
 * Christoph Dette
@@ -524,6 +530,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Henry Hood
 * HimKo
 * HouseFPV
+* Howard Simons
 * HyunohRyu
 * Icculus
 * iks
@@ -697,6 +704,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Nick Roethemeier
 * Nico Baumgartner
 * Nicolai Kragh-Hansen
+* Nigel Smith
 * Nihal Fernando
 * Nils Orbat
 * Nis Wechselberg
@@ -750,6 +758,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Richard Freemantle
 * Richard Michael
 * Rico Cantrell
+* Rob Holden
 * Rob Tongue
 * Robert Klauco
 * Robert Weemhoff 
@@ -842,7 +851,9 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Viktor Ekmark
 * Vlad Sterescu
 * Volker Gropp
+* Walli
 * Walter_Ego
+* William Wenzel
 * Will Froning
 * William Hooper
 * William Perrin

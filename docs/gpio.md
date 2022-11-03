@@ -168,6 +168,16 @@ Some rules and customization options:
 * To change title of the button, write some its name like `"relay1|My cool relay"`.
 * Buttons and switches can request confirmation on acting. To do this write its name like `"relay1|confirm|My cool relay"`. The third argument with a title is required in this case.
 
+Also you can place some leds in the menu title using the similar syntax:
+
+```yaml
+kvmd
+    gpio:
+        view:
+            header:
+                title: ["#Test1:", led1, "Test2:", led2]
+```
+
 
 -----
 ## Hardware modules and pseudo-drivers
@@ -290,9 +300,17 @@ Some rules and customization options:
 
 
     Commands are executed from the user `kvmd`. If you want to run the command as root, then you need to configure `sudo`. Example of the `/etc/sudoers.d/custom_commands`:
+    
+    Granular example
 
     ```sudoers
     kvmd ALL=(ALL) NOPASSWD: /usr/bin/reboot
+    ```
+    
+    NON Granular example (Captures ALL commands)
+    
+    ```sudoers
+    kvmd ALL=(ALL) NOPASSWD: ALL
     ```
 
     Example of the `/etc/kvmd/override.yaml`:
@@ -315,6 +333,16 @@ Some rules and customization options:
                     - ["reboot_button|confirm|Reboot PiKVM"]
     ```
 
+    An example to help you get started:
+
+    * `cmd: [/usr/bin/sudo, kvmd-otgconf, --disable-function, mass_storage.usb0]`
+    * `cmd: [(absolute path to sudo, command, flag, flag, absolute path to file]`
+
+    Then run the following:
+
+    ```
+    systemctl restart kvmd
+    ```
 
 ### PWM
 ??? note "Click to view"

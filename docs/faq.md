@@ -113,7 +113,7 @@ As a first step, we recommend carefully reading our documentation on [GitHub](ht
         product: Corsair Gaming RGB
         vendor_id: 0x6940
         product_id: 0x6973
-		serial:
+        serial:
     ```
 
     Use the following USB database to get the desired devices: https://the-sz.com/products/usbid or https://devicehunt.com.
@@ -316,6 +316,12 @@ As a first step, we recommend carefully reading our documentation on [GitHub](ht
     If you can't or don't want to enable the CSM, you can try connecting a DisplayPort (DP) monitor, or a [dummy plug](http://amazon.com/s?k=displayport+dummy+plug). If you remove the DP cable/adapter the bug will reappear.
 
     If none of this works, try connecting the DP cable first, boot into the BIOS, disable the CSM and shutdown (do not restart) your PC. Then, boot into the BIOS and enable the CSM before shutting down your PC. Then connect the HDMI and turn your PC on again.
+
+
+??? question "There is no video in GRUB2, but there is before and after"
+    Sometimes this can be caused by the specifics of the BIOS/UEFI and how GRUB2 works with video.
+
+    This can be solved by enabling the **Compatibility Support Module (CSM)** in your BIOS, usually under the **Boot** options. The video mode will be located in the same section. Switch the **Video** mode from **UEFI** to **Legacy**.
 
 
 ??? question "Why does the CSI bridge does not work with official Raspberry Pi PoE HAT?"
