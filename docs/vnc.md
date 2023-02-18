@@ -5,10 +5,11 @@ As an alternative to the web interface, you can use VNC with various desktop cli
 !!! warning
     Don't use VNC without X.509 or TLS encryption on untrusted networks! Otherwise your password will be transmitted over the network in plain text. Unfortunately, this is the reality of the VNC protocol.
     
-??? note 
-    VNC and its varients/TeamViewer/RDP to a system uses the target systems framebuffer IE local display, VNC usage for PiKVM accesses the stream, there will still be a 100-200MS latency and cannot be compared with the other software solutions. 
-    NORMAL USAGE: VNC/TM/RDP -> Target system 
-    PiKVM USAGE: VNC -> PiKVM -> Target system
+!!! note 
+    VNC and its varients/TeamViewer/RDP to a system uses the target systems framebuffer IE local display, VNC usage for PiKVM accesses the stream, there will still be a 100-200ms latency and cannot be compared with the other software solutions.
+
+      * NORMAL USAGE: *VNC/TM/RDP -> Target system*
+      * PiKVM USAGE: *VNC -> PiKVM (hardware capture, processing) -> Target system*
 
 
 ## Enabling VNC on the PiKVM side
@@ -26,7 +27,7 @@ As an alternative to the web interface, you can use VNC with various desktop cli
 
     <img src="keymaps.png" />
 
-3. *Optional:* This step is not nessessory if using TigerVNC. Some VNC clients (for example TightVNC) can't use user/password authentication. In this case you can enable passphrases mode in `/etc/kvmd/override.yaml`:
+3. *Optional:* This step is not nessessory if using TigerVNC as it uses the webgui user:pass. Some VNC clients (for example TightVNC) can't use user/password authentication. In this case you can enable passphrases mode in `/etc/kvmd/override.yaml`:
 
     ```yaml
     vnc:
@@ -41,20 +42,24 @@ As an alternative to the web interface, you can use VNC with various desktop cli
 
 5. Switch filesystem back to read-only: `ro`.
 
+!!! note
+    With enabled [2FA](auth.md#two-factor-authentication), you will need to add the one-time code to the password without spaces. That is, if the password is `foobar` and the code is `123456`, then you need to use `foobar123456` as the password. Also note that `vncauth` (step 3) will not work with 2FA.
+
 
 ## Configuring the client
 
 We recommend [TigerVNC](https://tigervnc.org) for a better experience on desktop.
 
+If you are using PiKVM V3+ or DIY based on CSI bridge, you can try the [beta version of TigerVNC with H.264 support](https://github.com/TigerVNC/tigervnc/releases/tag/v1.12.90). It will improve performance and save traffic.
+
+H.264 is available in binary builds for Windows, for other OS it needs to be compiled manually (before that, you need to install ffmpeg libraries).
+
 Here are our recommended settings for TigerVNC:
 
-* **Compression** tab:
-    * Choose **Tight** encoding as preferred and color-level **Full**.
-    * Disable automatic quality adjust settings **Auto Select**.
-    * Enable **Allow JPEG compression**.
-* **Security** tab:
-    * Enable **None**, **X.509 TLS** and **Anonymous TLS** encryption (or choose one preferred mode).
-    * Enable **Username and password** authentication.
+| Compression tab | Security tab |
+|-----------------|--------------|
+| <img src="tigervnc_compression.png" width="300" /> | <img src="tigervnc_security.png" width="300" /> |
+| If your client does not support H.264, choose **Tight** | |
 
 For iOS and Android the recommended application is bVNC:
 
@@ -65,5 +70,6 @@ For iOS and Android the recommended application is bVNC:
 ## Unsupported clients
 
 * **RealVNC** - Does not support most widely used open VNC protocol extensions.
+* **Remmina** - Slightly imperfect algorithms for matching settings with the server, we are working on it.
 * **Guacamole** - Incorrectly implements vencrypt, no JPEG compression.
-* **Vinagre** - Incorrectly implements vencrypt.
+* **Vinagre** - Incorrectly implements vencrypt, dead.

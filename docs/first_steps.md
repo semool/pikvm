@@ -4,7 +4,12 @@
 
 !!! warning
     For v2 DIY owners, please follow this [first](https://github.com/pikvm/pikvm)<br />
-    For v3 HAT Users, please follow this [first](https://docs.pikvm.org/v3/)
+    For v3 HAT OR Pre-Assembled Users, please follow this [first](https://docs.pikvm.org/v3/)
+    For both to work and display a video, your target system needs to be configured for the following:
+        1920x1080p50Hz (In some rare instances, try 30hz)
+        1600x1200p60Hz
+        1280x720p60Hz
+        
 
 
 ??? example "Optional setting up Wi-Fi"
@@ -19,8 +24,8 @@
 
     ```
     FIRSTBOOT=1
-    WIFI_ESSID="mynet"
-    WIFI_PASSWD="p@s$$w0rd"
+    WIFI_ESSID='mynet'
+    WIFI_PASSWD='p@s$$w0rd'
     ```
     
     There is a possibility that, in countries that support CH13, the device will not connect.
@@ -52,7 +57,7 @@ For future examples, let's assume that your PiKVM has received the address **192
 ??? example "Access to PiKVM Web Interface"
     In MOST networks you should be able to reach PiKVM via any browser with the URL `https://192.168.0.100/` OR `https://pikvm/`. Google Chrome (Chromium), Firefox and Safari work best with 0 extensions enabled, if one works but the others do not, this is a browser/extension issue. Its advised you use Private window or Incog mode. Microsoft Edge and Internet Explorer are not supported.
 
-    **The default user is `admin` and the password is also `admin`.** After logging in, you will get access to the menu with the main functions. Using the Web terminal, you can change system settings and passwords.
+    **The default user is `admin`, the password is also `admin`, and no 2FA code.** After logging in, you will get access to the menu with the main functions. Using the Web terminal, you can change system settings and passwords.
 
     *The latest versions of Chrome on Mac OS do not allow access to the page with a self signed certificate, which is used in PiKVM by default. You can proceed by typing `thisisunsafe` and Chrome will then load the page.*
 
@@ -77,7 +82,7 @@ For future examples, let's assume that your PiKVM has received the address **192
     PiKVM comes with the following default passwords:
 
     * **Linux admin** (SSH, etc.): user `root`, password `root`.
-    * **PiKVM Web Interface**: user `admin`, password `admin`.
+    * **PiKVM Web Interface**: user `admin`, password `admin`, no 2FA code.
 
     **These are two separate entities with independent accounts.** To change passwords, you will need to use the terminal (read below) access via SSH or Web Terminal. If you are using the Web Terminal, use the `su -` command to get root access (enter the root user password).
 
@@ -87,11 +92,13 @@ For future examples, let's assume that your PiKVM has received the address **192
     # kvmd-htpasswd set admin
     # ro
     ```
-    If you require additional user changes you can use the following:
+    If you require additional user for the Web UI access, use the following:
     ```
-    # kvmd-htpasswd set <user> # Sets a new user
+    # kvmd-htpasswd set <user> # Sets a new user with password
     # kvmd-htpasswd del <user> # Removes/deletes a user
     ```
+
+    Optionally you can enable the [two-factor authentication](auth.md#two-factor-authentication).
 
 ## Configuring PiKVM
 

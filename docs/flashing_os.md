@@ -8,7 +8,7 @@
 
 Download the appropriate SD card image. Select it based on the board, platform, and the video capture device you are using:
 
-* **V3 HAT (Patron, Kickstarter, and future editions)**
+* **V3 HAT (Patron, Kickstarter, Pre-Assembled and future editions)**
     * [PiKVM v3 HAT BOX Image (Raspberry Pi 4) OLED/FAN preactivated](https://files.pikvm.org/images/v3-hdmi-rpi4-box-latest.img.xz) <sub>- [*sha1*](https://files.pikvm.org/images/v3-hdmi-rpi4-box-latest.img.xz.sha1)
     * [PiKVM v3 HAT DIY Assembly (Raspberry Pi 4)](https://files.pikvm.org/images/v3-hdmi-rpi4-latest.img.xz) <sub>- [*sha1*](https://files.pikvm.org/images/v3-hdmi-rpi4-latest.img.xz.sha1)</sub>
 * **DIY - Raspberry Pi 4, v2 platform:**
@@ -78,5 +78,7 @@ You can also use `dd_rescue` or `ddrescue`.
 
     !!! tip
         If an error occurs during flashing or booting PiKVM, repeat the process.
+   
+!!! warning "If you encounter errors after flashing, reflash or use a different SD card."
         
 When you have completed these steps, please move to the [First Steps doc.](https://docs.pikvm.org/first_steps/)

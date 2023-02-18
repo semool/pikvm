@@ -94,6 +94,7 @@ As a first step, we recommend carefully reading our documentation on [GitHub](ht
 
 
 ??? question "How do I emulate various USB devices on the target machine?"
+    Please review [First Steps](first_steps.md) before continuing
     By default this is what is set:
 
     ```yaml
@@ -130,7 +131,17 @@ As a first step, we recommend carefully reading our documentation on [GitHub](ht
     /usr/bin/kvmd-oled --height=32 --interval=5 --clear-on-exit --text="turn off in 5s"
     systemctl disable --now kvmd-oled kvmd-oled-reboot kvmd-oled-shutdown
     ```
-
+    
+??? question "How do I rotate the OLED display?"
+    Please run the following:
+    ```
+    1. mkdir -p /etc/systemd/system/kvmd-oled.service.d
+    2. Create file /etc/systemd/system/kvmd-oled.service.d/override.conf:
+    [Service]
+    ExecStart=
+    ExecStart=/usr/bin/kvmd-oled --height=32 --clear-on-exit --rotate=2
+    ```
+    
 ??? question "I am getting a 500/503 error when I try and access the main KVM page!"
     The latest images take care of these issues, please reflash and edit, otherwise follow the below.
     This is due to your recent changes in your yaml file; you have to use spaces and NOT tabs.
@@ -167,7 +178,17 @@ As a first step, we recommend carefully reading our documentation on [GitHub](ht
         * Only USB OR the RJ-45 serial connector will work, you can't use them together! 
         * If you disable the service permanently, you can't recover your device via serial console if you need this.
         * There are some reports, that you need to remove "ttyAMA0" from /boot/cmdline.txt, but this is not needed on new installations.
-
+        
+??? question "How can I have different hostnames for multiple pikvms?"
+    Using a SSH session or the web terminal:
+    - Make sure you're `root`, if you're not root use the `su` command to become root
+    - Enter read write mode of the PiKVM by executing the `rw` command
+    - Execute: `hostnamectl set-hostname yournewhostname.domain`
+    - Optional: Edit `/etc/kvmd/meta.yaml` to alter the displayed server name in the web UI
+    - Reboot the pikvm
+    
+??? question "Can I run PiKVM in a docker?"
+    Technically it might be possible but the OS requires many specific settings that cannot be performed inside the container.
 
 ## First steps
 
@@ -176,7 +197,7 @@ As a first step, we recommend carefully reading our documentation on [GitHub](ht
 
 
 ??? question "What is the default password? How do I change it?"
-    There are two types of accounts: OS and PiKVM (web interface) accounts. The system account `root` can be used for SSH/UART access and has the password `root`. The web interface account is called `admin` and has the password `admin`. The PiKVM account cannot be used for SSH access and vice versa.
+    There are two types of accounts: OS and PiKVM (web interface) accounts. The system account `root` can be used for SSH/UART access and has the password `root`. The web interface account is called `admin` and has the password `admin`, no 2FA code. The PiKVM account cannot be used for SSH access and vice versa.
 
     To change passwords, use the following commands (under root):
 
@@ -188,6 +209,26 @@ As a first step, we recommend carefully reading our documentation on [GitHub](ht
     ro  # Back to read-only
     ```
 
+    Optionally you can enable the [two-factor authentication](auth.md#two-factor-authentication).
+
+??? question "How do I add another user?"
+    As stated above you need to make 2 accounts, 1 for the shell, the other for the PiKVM Web UI.
+    
+    ```
+    If you require additional users for PiKVM UI, you can use the following:
+    # rw
+    # su -
+    # kvmd-htpasswd set <user> # Adds a new user
+    # kvmd-htpasswd set <user> # Sets the password as long as the user exists
+    # kvmd-htpasswd del <user> # Removes/deletes a user
+    
+    To add a shell/terminal account:
+    # rw
+    # su -
+    # adduser <user>
+    # passwd <user>
+    ```
+    Keep in mind that the more users that are added, the stream if accessed, fps will drop.
 
 ??? question "How do I get root access in the web terminal?"
     The web terminal works with the account `kvmd-webterm`. This is a regular user with no administrator privileges. In addition, `sudo` and login are disabled for this user for security reasons. To get `root` access, you need to use the `su -` command (minus is important) and **enter the root password**.
@@ -225,9 +266,9 @@ As a first step, we recommend carefully reading our documentation on [GitHub](ht
     PiKVM OS is based on Arch Linux ARM and uses the [pacman](https://wiki.archlinux.org/title/Pacman) package manager.
 
     * Switch filesystem to RW-mode: `rw`.
-    * Update the package cache: `pacman -Syy`.
     * Find some packages (`emacs` for example): `pacman -Ss emacs`.
-    * Install it: `pacman -S emacs`.
+    * Install it, while keeping the system updated: `pacman -Syu emacs`.
+    * To only update packages without installing new ones, use `pacman -Syu`
     * Remove it: `pacman -R emacs`.
     * Switch filesystem to RO-mode: `ro`.
 
@@ -241,7 +282,7 @@ As a first step, we recommend carefully reading our documentation on [GitHub](ht
     # reboot
     ```
 
-    Pacman saves all installed packages in a compressed format so that you can roll back to the old version if something goes wrong. After you've updated and made sure everything works, it makes sense to clear the package cache so that it doesn't take up space on the SD card: `rw; rm -rf /var/cache/pacman/pkg; ro`.
+    Pacman saves all installed packages in a compressed format so that you can roll back to the old version if something goes wrong. After you've updated and made sure everything works, (ONLY for older images, newer images has this partition expended and no longer has this issue) it makes sense to clear the package cache so that it doesn't take up space on the SD card: `rw; rm -rf /var/cache/pacman/pkg; ro`.
 
 
 ??? question "I don't need ATX functions. How do I disable this in the Web UI?"
