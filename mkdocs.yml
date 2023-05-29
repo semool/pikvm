@@ -60,7 +60,8 @@ plugins:
 
 nav:
     - "Getting started":
-        - "PiKVM v3 HAT guide": v3.md
+        - "PiKVM V4 Mini & Plus guide": v4.md
+        - "PiKVM V3 HAT guide": v3.md
         - "First steps": first_steps.md
         - "Authentication": auth.md
         - "FAQ": faq.md
@@ -68,6 +69,7 @@ nav:
         - "Internet access":
             - "Port forwarding": port_forwarding.md
             - "Tailscale VPN": tailscale.md
+            - "Cloudflare Tunnel": cloudflared.md
         - "Setting up Wi-Fi": wifi.md
         - "Let's Encrypt certificates": letsencrypt.md
     - "Video":

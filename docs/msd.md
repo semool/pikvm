@@ -17,21 +17,10 @@ There are some subtleties that you should know:
     The switch affects the settings of the future connection. For non-v3 devices,
     you need to either reboot your server or otherwise reinitialize the connection.
 
-!!! warning "Advanced Linux knowledge is necessary for some advanced aspects that are not part of the normal use case. IE: making larger flash files will need a different file location and those instructions will need to be modified. The following instructions are for you to have something to start with."
-
 -----
-## Disable MSD
-
-To disable mass storage emulation altogether, you can place the following piece of configuration into `/etc/kvmd/override.yaml`:
-
-``` yaml
-kvmd:
-    msd:
-        type:  disabled
-``` 
-
-
 ## Upload images manually (without Web UI)
+
+!!! info "This instruction is relevant for KVM >= 3.203. If you are using a previous version, then update OS."
 
 1. Remount internal storage to rw (read-write):
 
@@ -39,12 +28,12 @@ kvmd:
     # kvmd-helper-otgmsd-remount rw
     ```
 
-2. Upload the .ISO image(s) to `/var/lib/kvmd/msd/images` via scp or similar.
+2. Upload the .ISO image(s) to `/var/lib/kvmd/msd` via scp or similar.
 
-3. Create an empty file in `/var/lib/kvmd/msd/meta/` with the exact name (case sensitive!) of the uploaded image. This will indicate PiKVM that the uploaded image is okay and can be used. For example:
+3. Create an empty file in `/var/lib/kvmd/msd` with the exact name (case sensitive!) of the uploaded image + prefix `.__` and suffix `.complete`. This will indicate PiKVM that the uploaded image is okay and can be used. For example:
 
     ```
-    /var/lib/kvmd/msd/meta/ubuntu-18.04.4-desktop-amd64.iso.complete
+    /var/lib/kvmd/msd/.__ubuntu-18.04.4-desktop-amd64.iso.complete
 
     ```
 
@@ -53,6 +42,45 @@ kvmd:
     ```
     # kvmd-helper-otgmsd-remount ro
     ```
+
+
+-----
+## NFS storage
+
+!!! info "This instruction is relevant for KVM >= 3.206. If you are using a previous version, then update OS."
+
+It is possible to create a shared image storage for an entire fleet of PiKVMs using [NFS](https://en.wikipedia.org/wiki/Network_File_System).
+
+If you have some shares, you can easily connect them to PiKVM by creating mount points and adding relevant records to `/etc/fstab`.
+At the same time, you will be able to upload images via PiKVM Web UI to NFS, and still use local storage.
+
+```
+# rw
+# pacman -Syu
+# pacman -S nfs-utils
+# kvmd-helper-otgmsd-remount rw
+# mkdir -p /var/lib/kvmd/msd/NFS_Primary
+# mkdir -p /var/lib/kvmd/msd/NFS_Secondary
+# kvmd-helper-otgmsd-remount ro
+```
+
+Edit fstab:
+
+```fstab
+server:/srv/nfs/NFS_Primary    /var/lib/kvmd/msd/NFS_Primary    nfs vers=3,timeo=1,retrans=1,soft,nolock  0 0
+server:/srv/nfs/NFS_Secondary  /var/lib/kvmd/msd/NFS_Secondary  nfs vers=3,timeo=1,retrans=1,soft,nolock  0 0
+```
+
+And perform `reboot`.
+
+Make sure that the `kvmd` user has read access rights from these directories. You can also give write access if needed.
+For the best performance, it is required to ensure reliable connectivity with NFS server and use minimum `timeo` and `retrans` values.
+**Using the `soft` option is mandatory, `nolock` is recommended.**
+
+Note if an image is added to the NFS storage from the outside, PiKVM will not be able to track this event, so it is required to use
+`Drive -> Reset` in the Web UI to update the list of images.
+
+Configuring an NFS server is beyond the scope of this guide.
 
 
 -----
@@ -65,6 +93,8 @@ to the server and download some files from to PiKVM from it.
 
 !!! info
     The presence of an additional Mass Storage Drive should not interfere with the boot, but for reasons of compatibility paranoia, this is disabled by default. We recommend setting up the drives in advance, making sure that booting from the ISO CD is still working, and then using the drives as needed.
+
+{!_usb_limits.md!}
 
 
 ### How to enable extra drives
@@ -89,7 +119,7 @@ to the server and download some files from to PiKVM from it.
 3. Perform `reboot`.
 
 
-### How to create RW flash drive
+### How to create a second RW flash drive
 
 1. Switch the root filesystem to `rw` mode:
 
@@ -138,6 +168,18 @@ to the server and download some files from to PiKVM from it.
 
 
 -----
+## Disable MSD
+
+To disable mass storage emulation altogether, you can place the following piece of configuration into `/etc/kvmd/override.yaml`:
+
+``` yaml
+kvmd:
+    msd:
+        type:  disabled
+``` 
+
+
+-----
 ## Create a Windows based Flash disk image
 
 An alternative version of this can be found below that does not require a physical usb flash
@@ -183,7 +225,7 @@ Once you have the desired USB stick perform the following on the RPi to create t
 3. Create image of USB data PARTITION to an image file, this will take some time, in this case about 12 minutes (RPi4).
 
     ```
-    # dd if=/dev/sda1 of=/var/lib/kvmd/msd/images/windows10-2004.bin bs=8M status=progress
+    # dd if=/dev/sda1 of=/var/lib/kvmd/msd/windows10-2004.bin bs=8M status=progress
     4458545152 bytes (4.5 GB, 4.2 GiB) copied, 736 s, 6.1 MB/s
     531+1 records in
     531+1 records out
@@ -193,8 +235,8 @@ Once you have the desired USB stick perform the following on the RPi to create t
 4. Correct ownership of new image and make sure the website reports the file as complete (pay attention to the different folder).
 
     ```
-    # chown kvmd:kvmd /var/lib/kvmd/msd/images/windows10-2004.bin
-    # touch /var/lib/kvmd/msd/meta/windows10-2004.bin.complete
+    # chown kvmd:kvmd /var/lib/kvmd/msd/windows10-2004.bin
+    # touch /var/lib/kvmd/msd/.__windows10-2004.bin.complete
     ```
 
 5. Remount msd folder as read only
@@ -234,7 +276,7 @@ You should be able to then mount it locally on the server, or reboot the device 
 * There is an assumption that you know basic linux to understand that not all dev devices are named exactly like the below
 
 ```
-dd if=/dev/zero of=ventoy.img bs=1M count=4700 status=progress
+# dd if=/dev/zero of=ventoy.img bs=1M count=4700 status=progress
 ```
 
 * This makes a ventoy.img file, I would name this what it is EG: `ventoy_win10.img`
@@ -244,14 +286,14 @@ dd if=/dev/zero of=ventoy.img bs=1M count=4700 status=progress
 * At the time of this, it was 1.0.51, change to latest version
 
 ```
-wget https://github.com/ventoy/Ventoy/releases/download/v1.0.51/ventoy-1.0.51-linux.tar.gz
-tar zxvf ventoy-1.0.51-linux.tar.gz
-sudo losetup -f ventoy.img
-sudo losetup -l | grep ventoy (To locate which loop device was used)
-sudo sh ~/ventoy-1.0.51/Ventoy2Disk.sh -i /dev/loopXX (This will make a loopXXp1 and a loopXXp2 and will format both partitions
-cd /media/XXX (Usually your login)
-mkdir ventoy
-sudo mount /dev/loopXXp1 /media/XXX/ventoy
+# wget https://github.com/ventoy/Ventoy/releases/download/v1.0.51/ventoy-1.0.51-linux.tar.gz
+# tar zxvf ventoy-1.0.51-linux.tar.gz
+# sudo losetup -f ventoy.img
+# sudo losetup -l | grep ventoy (To locate which loop device was used)
+# sudo sh ~/ventoy-1.0.51/Ventoy2Disk.sh -i /dev/loopXX (This will make a loopXXp1 and a loopXXp2 and will format both partitions
+# cd /media/XXX (Usually your login)
+# mkdir ventoy
+# sudo mount /dev/loopXXp1 /media/XXX/ventoy
 ```
 
 * Either cp/scp over the .iso you downloaded from the Media tool or use a NFS mount
@@ -269,20 +311,20 @@ ssh into the Ubuntu system (Or whatever OS you are using)
 * On PiKVM
 
 ```
-cd /var/lib/kvmd/msd
-mount -o remount,rw .
+# cd /var/lib/kvmd/msd
+# mount -o remount,rw .
 ```
 
 * On Ubuntu
 
 ```
-scp ventoy.img root@pikvm:/var/lib/kvmd/msd/images
+# scp ventoy.img root@pikvm:/var/lib/kvmd/msd
 ```
 
 * On PiKVM
 
 ```
-touch /var/lib/kvmd/msd/meta/ventoy.img.complete
+# touch /var/lib/kvmd/msd/.__ventoy.img.complete
 ```
 
 * Mount `ventoy.img` as normal flash and select the PiKVM boot device, it should popup with the VenToy logo with the window.iso as a selection 

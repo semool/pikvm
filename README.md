@@ -5,7 +5,7 @@ A very simple and fully functional Raspberry Pi-based KVM (Keyboard-Video-Mouse)
 
 The website: [pikvm.org](https://pikvm.org). Also check out [the documentation](https://docs.pikvm.org) and join to the [Discord Community Chat](https://discord.gg/bpmXfz5) for news, questions and support!
 
-| **[>>> New PiKVM V4 on Kickstarter RIGHT NOW <<<](https://www.kickstarter.com/projects/mdevaev/pikvm-v4)** |
+| **[>>> New PiKVM V4 on Kickstarter - Soon on sale <<<](https://www.kickstarter.com/projects/mdevaev/pikvm-v4)** |
 | ---------------------------------------------------------------------------------------------------------- |
 | <a href=https://www.kickstarter.com/projects/mdevaev/pikvm-v4><img src="https://raw.githubusercontent.com/pikvm/pikvm/master/img/v4.jpg" alt="drawing"/></a> |
 
@@ -24,7 +24,7 @@ The website: [pikvm.org](https://pikvm.org). Also check out [the documentation](
 * Supported **Raspberry Pi 2**, **3**, **4** and **Zero2W**;
 * **FullHD video** using advanced **HDMI-to-CSI bridge** or **USB dongle**;
 * Extra low **video latency** with **MJPEG** or **H.264 / WebRTC** (for CSI bridge);
-* Bootable **Virtual CD-ROM** and **Flash Drive**;
+* Bootable **Virtual CD-ROM** and **Flash Drive**, ability to store images on **NFS**;
 * USB **Keyboard** and **mouse** (with leds and the wheel), PS/2 keyboard, Bluetooth HID;
 * **Control the server power** using ATX functions;
 * Access via **Web UI** or **VNC**;
@@ -338,6 +338,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Accalia
 * Adam Goodbar
 * Adam S
+* Adam Stuart
 * adipisicing
 * Adrian Basham
 * Ahmed Syed
@@ -481,6 +482,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Dennis Becker
 * Dennis Joslin
 * Dennis Lomet
+* Derek Jarvis
 * Derek Yap
 * Didrik
 * Dimitrij Jedich
@@ -609,6 +611,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Joseph Swift
 * Josh Nethery
 * Josh Ricker
+* Josh VanDeraa
 * Joshua Futterer
 * Jordan Blake
 * Jordi Pakey-Rodriguez
@@ -641,6 +644,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Lance Ward
 * Larry Meaney
 * Lars
+* Lars Reinhardt
 * Lee Wilkinson
 * LeeNX
 * Leon Siegl
@@ -681,6 +685,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Marshall Bjerke
 * Marten Hermans
 * Martin Gasser
+* Martin Raine
 * Martin Suelmann
 * Martin Wilhelmi
 * Marvin Honderboom
@@ -771,6 +776,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Ref Chowdhury
 * Raphael Schitz
 * René Rathenau
+* ReysDad
 * Ricardo Marques
 * Richard
 * Richard Bernarts
@@ -872,6 +878,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Vidru Eduard
 * Viktor Aschenbrenner
 * Viktor Ekmark
+* Vincent Chov
 * Vlad Sterescu
 * Volker Gropp
 * Walli
