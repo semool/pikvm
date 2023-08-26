@@ -9,6 +9,8 @@ file system, special tools around Certbot are required to work with certificates
     This feature is available on images as old as 2022.06.19 since it requires [PST storage partition on SD card](pst.md).
     Ports 80+443 need to be opened if you are port forwarding for this to work properly.
 
+
+-----
 ## Basic setup
 
 1. Update the OS and make sure that you are using a new image with [PST storage](pst.md).
@@ -52,6 +54,8 @@ file system, special tools around Certbot are required to work with certificates
       # ro
       ```
 
+
+-----
 ## Cloudflare DNS
 
 This example shows that PiKVM may not be accessible from the internet, but you can still get a certificate if you use Cloudflare DNS.
@@ -69,7 +73,9 @@ This example shows that PiKVM may not be accessible from the internet, but you c
       # kvmd-pstrun -- mkdir -p /var/lib/kvmd/pst/data/certbot/runroot
       # kvmd-pstrun -- nano /var/lib/kvmd/pst/data/certbot/runroot/.cloudflare.auth
       # kvmd-pstrun -- chmod 600 /var/lib/kvmd/pst/data/certbot/runroot/.cloudflare.auth
+      # kvmd-pstrun -- chown kvmd-certbot: /var/lib/kvmd/pst/data/certbot/runroot/.cloudflare.auth
       ```
+      See certbot-dns-cloudflare's doc [here](https://certbot-dns-cloudflare.readthedocs.io/en/stable/) about the content of `.cloudflare.auth`.
 
 3. Obtain the certificate:
 
@@ -84,8 +90,10 @@ This example shows that PiKVM may not be accessible from the internet, but you c
          -d pikvm.example.com
       ```
 
-4. Next follow the basic guide.
+4. Next follow the basic guide starts at step 3.
 
+
+-----
 ## Route53 DNS
 
 This example shows that PiKVM may not be accessible from the internet, but you can still get a certificate if you use AWS Route53 DNS. Make sure you are running an image newer than 2022.06.20 and kvmd version 3.119-1 or greater.
@@ -154,6 +162,7 @@ This example shows that PiKVM may not be accessible from the internet, but you c
 
       ```
       # kvmd-pstrun -- chmod 600 /var/lib/kvmd/pst/data/certbot/runroot/.route53.auth
+      # kvmd-pstrun -- chown kvmd-certbot: /var/lib/kvmd/pst/data/certbot/runroot/.route53.auth
       ```
 
 4. Obtain the certificate:
@@ -182,6 +191,7 @@ This example shows that PiKVM may not be accessible from the internet, but you c
       # systemctl enable --now kvmd-certbot.timer
       ```
 
+-----
 ## ACME DNS
 
 [ACME DNS](https://github.com/joohoi/acme-dns) is a _"Limited DNS server with RESTful HTTP API to handle ACME DNS challenges easily and securely."_ The [acme-dns-client](https://github.com/acme-dns/acme-dns-client) works, in conjunction, with Certbot (**`kvmd-certbot`**) to enable **`DNS-01`** challenge support via ACME DNS.

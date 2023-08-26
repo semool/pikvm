@@ -6,8 +6,8 @@ This is useful if you need a simple and primitive keyboard/mouse emulator device
 -----
 ## Serial HID
 
-!!! warning "PiKVM V3 HAT note"
-    Don't use it, use [SPI HID](#spi-hid) for V3. Otherwise, you won't be able to use the Serial console.
+!!! warning "PiKVM V3 note"
+    Use [the SPI HID](#spi-hid) for V3. Otherwise, you won't be able to use the Serial console.
 
 ### USB keyboard and mouse
 
@@ -179,7 +179,7 @@ Programming assumes the Arduino is powered via USB, either from the connected ho
 As of the latest package release, the kdmd service supports SPI. It should be sufficient to ensure the packages are up-to-date with the latest release, the programmer is installed, and the SPI device overlay is loaded at boot.
 
 * Switch the filesystem to read-write mode with `rw`
-* Update the system and nstall the avrdude programmer `pacman -Syu avrdude-svn`
+* Update the system and install the avrdude programmer `pacman -Syu avrdude-pikvm`
 * Add `dtoverlay=spi0-1cs` to `/boot/config.txt`
 * Reboot with `reboot` or `systemctl reboot`
 

@@ -1,21 +1,20 @@
 # First steps
 
+!!! note
+    Before this guide:
+
+    * V4 device: please follow this [first](v4.md)
+    * V3 HAT/Pre-Assembled: follow [this](v3.md)
+    * V0-V2 DIY: follow [this](https://github.com/pikvm/pikvm)
+
+
+-----
 ## First power on
-
-!!! warning
-    - V2 DIY owners: Please follow this [first](https://github.com/pikvm/pikvm)<br>
-    - V3 HAT *or* pre-assembled users: Please follow this [first](https://docs.pikvm.org/v3/)<br>
-    - For both to work and display a video, your target system needs to be configured for the following:<br>
-        1920x1080p50Hz (In some rare instances, try 30hz)<br>
-        1600x1200p60Hz<br>
-        1280x720p60Hz<br>
-        
-
 
 ??? example "Optional setting up Wi-Fi"
     !!! warning "Please read the following caveats" 
         1. There is nothing more reliable than wired Ethernet, so it's better to use the **cable**. But who are we to stop you... :)
-        2. Adding FIRSTBOOT=1 or FIRSTBOOT-1 will erase the msd partition, if used afterwords as a means of switching wifi networks, do not include this option. Instead, use different supplicant files for each wifi SSID, mv files to the supplicant dir as needed and reboot.
+        2. Adding FIRSTBOOT=1 or FIRSTBOOT=1 will erase the msd partition, if used afterwords as a means of switching wifi networks, do not include this option. Instead, use different supplicant files for each wifi SSID, mv files to the supplicant dir as needed and reboot.
         3. `pikvm.txt` will be removed once its been used. You will need to recreate it again if you did not provide the correct info
 
     If you want to connect PiKVM to a Wi-Fi network, you need to tell the device ESSID and password before first boot.
@@ -39,6 +38,7 @@
     After turning on the power, PiKVM OS will generate unique SSH keys and certificates and will perform all necessary operations on the memory card.
 
 
+-----
 ## Getting access to PiKVM
 
 By default, PiKVM receives a dynamic IP address via DHCP. V3+ devices show IP on the built-in display. If you don't have a display, use the tips below:
@@ -79,29 +79,10 @@ For future examples, let's assume that your PiKVM has received the address **192
     reboot
     ```
 
-??? danger "✮ ✮ ✮ CHANGE THE PASSWORDS! ✮ ✮ ✮"
-    PiKVM comes with the following default passwords:
-
-    * **Linux admin** (SSH, etc.): user `root`, password `root`.
-    * **PiKVM Web Interface**: user `admin`, password `admin`, no 2FA code.
-
-    **These are two separate entities with independent accounts.** To change passwords, you will need to use the terminal (read below) access via SSH or Web Terminal. If you are using the Web Terminal, use the `su -` command to get root access (enter the root user password).
-
-    ```
-    # rw
-    # passwd root
-    # kvmd-htpasswd set admin
-    # ro
-    ```
-    If you require additional user for the Web UI access, use the following:
-    ```
-    # kvmd-htpasswd set <user> # Sets a new user with password
-    # kvmd-htpasswd del <user> # Removes/deletes a user
-    ```
-
-    Optionally you can enable the [two-factor authentication](auth.md#two-factor-authentication).
+{!_passwd.md!}
 
 
+-----
 ## Configuring PiKVM
 
 Most of the PiKVM settings are done through configuration files. All configuration changes must be made from under the `root` user (= the administrator).
@@ -172,6 +153,7 @@ Comments starts with the `#` symbol.
 
 -----
 ## What's next?
+
 * Set up Internet access using [port forwarding](port_forwarding.md) or [Tailscale VPN](tailscale.md).
 * Explore PiKVM features using the table of contents on the left.
 * Join our [Discord](https://discord.gg/bpmXfz5) to contact the community and developers.
@@ -180,7 +162,8 @@ Comments starts with the `#` symbol.
 
 -----
 ## FAQ and Troubleshooting
+
 If you have any questions or run into problems, take a look at the [FAQ](faq.md).
-Seriously, it's really useful! We've probably already found a solution for it :)
+Seriously, it's really useful!
 
 For any other help and support, you can contact us via the [Discord chat](https://discord.gg/bpmXfz5).

@@ -5,9 +5,9 @@ A very simple and fully functional Raspberry Pi-based KVM (Keyboard-Video-Mouse)
 
 The website: [pikvm.org](https://pikvm.org). Also check out [the documentation](https://docs.pikvm.org) and join to the [Discord Community Chat](https://discord.gg/bpmXfz5) for news, questions and support!
 
-| **[>>> New PiKVM V4 on Kickstarter - Soon on sale <<<](https://www.kickstarter.com/projects/mdevaev/pikvm-v4)** |
+| **[>>> New PiKVM V4 - Buy it right now! <<<](https://pikvm.org/buy)** |
 | ---------------------------------------------------------------------------------------------------------- |
-| <a href=https://www.kickstarter.com/projects/mdevaev/pikvm-v4><img src="https://raw.githubusercontent.com/pikvm/pikvm/master/img/v4.jpg" alt="drawing"/></a> |
+| <a href=https://pikvm.org/buy><img src="https://raw.githubusercontent.com/pikvm/pikvm/master/img/v4.jpg" alt="drawing"/></a> |
 
 
 | **[>>> DIY Device Getting Started <<<](#diy-getting-started)** | **[>>> PiKVM V3 Getting Started <<<](#pikvm-v3)** |
@@ -152,7 +152,7 @@ PiKVM supports several different hardware configurations, referred to as **platf
   * 1x [Raspberry Pi Zero Camera Cable](https://aliexpress.com/item/32953696917.html) (if using HDMI to CSI-2 Bridge, but not compatible with Auvidea B101, check pinout).
 * For ATX control (optional):
   - [4x MOSFET relays OMRON G3VM-61A1](https://www.digikey.com/products/en?keywords=G3VM-61A1).
-  - 4x 390 Ohm resistors.
+  - 4x 390 Ohm resistors (see [#46](https://github.com/pikvm/pikvm/issues/46) for alternatives).
   - 2x 4.7k Ohm resistors.
   - A breadboard and wires.
 
@@ -339,6 +339,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Adam Goodbar
 * Adam S
 * Adam Stuart
+* AdamBomb
 * adipisicing
 * Adrian Basham
 * Ahmed Syed
@@ -383,6 +384,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * baddog
 * Bao Tin Hoang
 * Bean Co.
+* Bela Bargel
 * Belf Igor
 * Ben Gordon
 * Ben Scott
@@ -399,6 +401,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * bitjoe
 * Bits and Bytes Computers LLC
 * Bjoern Petsch
+* Blindside
 * Blue Frog LLC
 * Bootstrapper - Programmierung erklärt
 * Bosco
@@ -516,6 +519,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Fredrik Idréus
 * Garrett Dangerfield
 * Ge Men
+* Geekworm
 * Genkinger Andreas
 * Geijer
 * George Becker
@@ -584,6 +588,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Jennifer Herting
 * Jennifer Rowlett
 * Jeremy Abel
+* Jeremy Combs
 * Jeremy Hines
 * Jerremy Holland
 * Jerry Nall
@@ -660,6 +665,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Ľubor Slušný
 * Luca Di Diomede
 * Lucio De Carli
+* Luiz Bizzio
 * Lukas Bischof
 * Lukas Kammerer
 * Lukas Söder
@@ -673,6 +679,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Marcos Wolf
 * Marek Marczykowski-Górecki
 * Marius
+* Mariusz Stępień
 * Mar. Balske
 * Mark Farrell
 * Mark Gilbert
@@ -750,6 +757,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Paul Bishop
 * Paul De La Rosa
 * Paul Pietkiewicz
+* Paul Tan
 * Pawel Trofimiuk
 * Peder Madsen
 * Peter
@@ -843,6 +851,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * Stratagem Solutions Ltd
 * Sven Breckler
 * sudo34
+* SuperHiTech
 * Tango_Echo_Alpha
 * Tarlak Desaydrone
 * TechBear
@@ -888,6 +897,7 @@ These kind people donated money to the PiKVM project and supported work on it. W
 * William Hooper
 * William Perrin
 * William Stearns
+* Woojin Son
 * xMdb
 * Yanko Kaneti
 * Yaroslav Kulikovskikh
